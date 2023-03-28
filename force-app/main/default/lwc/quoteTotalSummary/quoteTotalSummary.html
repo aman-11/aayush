@@ -1,12 +1,16 @@
 <!-- Quote Total Summary -->
 <template>
-  <div class="slds-m-around_medium">
+  <template if:true={loading}>
+    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+  </template>
+  <div if:false={loading}  class="slds-m-around_medium">
     <h3 class="slds-page-header__title">Quote Adjusted Amount</h3>
     <span>&nbsp;</span>
     <lightning-button
       variant="brand"
       type="button"
       label="Adjust quote"
+      onclick={handleAdjustQuote}
     ></lightning-button>
   </div>
 </template>

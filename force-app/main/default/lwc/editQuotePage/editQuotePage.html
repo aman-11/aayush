@@ -1,9 +1,27 @@
 <!-- Edit Quote Page -->
 <template>
-  <div class="slds-tabs_card">
-    <c-quote-total-summary></c-quote-total-summary>
-    <div class="slds-m-around_medium">
-      <c-edit-quote record-id={recordId}></c-edit-quote>
-    </div>
-  </div>
+	<div class="slds-tabs_card">
+		<c-quote-total-summary loading={loading} onopenadjustmodal={handleAdjustModal}></c-quote-total-summary>
+		<div class="slds-m-around_medium">
+			<c-edit-quote quote-data={quoteData} loading={loading} onsavequotebtn={handleQuoteSave}></c-edit-quote>
+			<!-- <c-edit-quote record-id={recordId}></c-edit-quote> -->
+		</div>
+	</div>
+
+	<template if:true={openAdjustModal}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<lightning-modal-header label="Adjust quote price"></lightning-modal-header>
+				<lightning-modal-body>
+					<c-adjust-quote-price onadjustmentvalue={handleAdjustValue} adjusted-amount={quoteData.adjustedAmnt}> </c-adjust-quote-price>
+				</lightning-modal-body>
+				<lightning-modal-footer>
+					<lightning-button label="Cancel" onclick={handleCloseAdjust}></lightning-button>
+					<lightning-button disabled={disableInp} variant="brand" label="Apply" onclick={handleSaveAdjust}></lightning-button>
+				</lightning-modal-footer>
+			</div>
+		</section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
 </template>
