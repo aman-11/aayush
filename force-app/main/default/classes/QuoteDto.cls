@@ -14,10 +14,11 @@ public with sharing class QuoteDto extends BaseDto {
   public override void refreshSo() {
     //using it to revert the client back with the single quote Data
     if (Schema.sObjectType.Quote__c.isAccessible()){
-      Quote__c quote = [SELECT Id, Name, start_date__c, EndDate__c FROM Quote__c WHERE Id=: this.id ];
+      Quote__c quote = [SELECT Id, Name, start_date__c, EndDate__c, TotalQuotedAmount__c  FROM Quote__c WHERE Id=: this.id ];
       this.name = quote.Name;
       this.startDate = quote.start_date__c;
       this.endDate = quote.EndDate__c;
+      this.adjustedAmnt = quote.TotalQuotedAmount__c;
     }
   }
 
